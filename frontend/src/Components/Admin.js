@@ -4,6 +4,7 @@ import '../Styles/AdminStyles.css';
 
 const Admin = () => {
     const [users, setUsers] = useState([]);
+    const [updates, setUpdates] = useState([]); // Novo estado para armazenar os dados dos arquivos CSV
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [role, setRole] = useState('trainee');
@@ -12,6 +13,7 @@ const Admin = () => {
 
     useEffect(() => {
         fetchUsers();
+        fetchUpdates(); // Chama a função para buscar atualizações
     }, []);
 
     const fetchUsers = async () => {
@@ -31,6 +33,16 @@ const Admin = () => {
         } catch (error) {
             console.error('Erro ao buscar usuários:', error);
             setError('Erro ao buscar usuários');
+        }
+    };
+
+    const fetchUpdates = async () => {
+        try {
+            const response = await axios.get('http://localhost:3000/api/updates/clientes'); 
+            setUpdates(response.data);
+        } catch (error) {
+            console.error('Erro ao buscar atualizações:', error);
+            setError('Erro ao buscar atualizações');
         }
     };
 
@@ -91,7 +103,6 @@ const Admin = () => {
                     <h1>Painel do Administrador</h1>
                     <p>Bem-vindo ao painel de administração!</p>
                 </div>
-                {error && <p className="erp-error-message">{error}</p>}
                 <form className="erp-form" onSubmit={handleSubmit}>
                     <h2>{editingUserId ? 'Editar Usuário' : 'Criar Novo Usuário'}</h2>
                     <div>
@@ -127,6 +138,19 @@ const Admin = () => {
                         </li>
                     ))}
                 </ul>
+            </div>
+            <div className="erp-updates">
+                <h2>Atualizações</h2>
+                {updates.length > 0 ? (
+                    updates.map((update, index) => (
+                        <div key={index}>
+                            <h3>Registro {index + 1}</h3>
+                            <pre>{JSON.stringify(update, null, 2)}</pre>
+                        </div>
+                    ))
+                ) : (
+                    <p>Nenhuma atualização disponível.</p>
+                )}
             </div>
         </div>
     );

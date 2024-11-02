@@ -11,7 +11,7 @@ app.listen(PORT, () => {
 pool.getConnection()
     .then(connection => {
         console.log('Conexão ao banco de dados bem-sucedida!');
-        connection.release(); 
+        connection.release();
     })
     .catch(err => {
         console.error('Erro ao conectar ao banco de dados:', err);

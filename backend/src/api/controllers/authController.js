@@ -43,9 +43,8 @@ const authController = {
                 return res.status(400).json({ message: 'Código expirado ou inválido' });
             }
 
-            // Verificar se o código está correto e se não está expirado
             if (Date.now() - verification.timestamp > 5 * 60 * 1000) {
-                verificationCodes.delete(username); // Remover código expirado
+                verificationCodes.delete(username); 
                 return res.status(400).json({ message: 'Código expirado' });
             }
 
@@ -53,11 +52,10 @@ const authController = {
                 return res.status(400).json({ message: 'Código incorreto' });
             }
 
-            // Gerar o token de autenticação se o código for correto
             const user = await UserRepository.findUserByUsername(username);
             const token = jwt.sign({ userId: user.id, username: user.username, role: user.role }, process.env.JWT_SECRET, { expiresIn: '1h' });
 
-            verificationCodes.delete(username); // Remover o código após a verificação bem-sucedida
+            verificationCodes.delete(username); 
 
             res.json({ token, role: user.role });
         } catch (error) {
