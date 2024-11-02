@@ -22,11 +22,12 @@ const authController = {
                 verificationCodes.set(username, { code: verificationCode, timestamp: Date.now() });
 
                 await sendVerificationEmail(user.username, verificationCode);
-                return res.status(200).json({ requiresVerification: true });
+                return res.status(200).json({ requiresVerification: true, role: user.role });
+                
             }
-
             const token = jwt.sign({ userId: user.id, username: user.username, role: user.role }, process.env.JWT_SECRET, { expiresIn: '1h' });
             res.json({ token, role: user.role });
+            
         } catch (error) {
             console.error('Erro durante o login:', error);
             res.status(500).json({ message: 'Erro interno do servidor' });
