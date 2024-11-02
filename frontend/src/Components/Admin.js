@@ -4,17 +4,28 @@ import '../Styles/AdminStyles.css';
 
 const Admin = () => {
     const [users, setUsers] = useState([]);
-    const [updates, setUpdates] = useState([]); // Novo estado para armazenar os dados dos arquivos CSV
+    const [updates, setUpdates] = useState([]); 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [role, setRole] = useState('trainee');
     const [editingUserId, setEditingUserId] = useState(null);
     const [error, setError] = useState('');
+    const [searchTerm, setSearchTerm] = useState({
+        advisor: '',
+        code: '',
+        name: ''
+    });
 
     useEffect(() => {
         fetchUsers();
-        fetchUpdates(); // Chama a função para buscar atualizações
+        fetchUpdates();
     }, []);
+
+
+    const handleSearchChange = (e) => {
+        const { name, value } = e.target;
+        setSearchTerm(prev => ({ ...prev, [name]: value }));
+    };
 
     const fetchUsers = async () => {
         const token = localStorage.getItem('token'); 
@@ -76,11 +87,26 @@ const Admin = () => {
         }
     };
 
+    
+    const handleLogout = () => {
+        localStorage.removeItem('token');
+        window.location.href = '/';
+    };
+
     const handleEdit = (user) => {
         setEditingUserId(user.id);
         setUsername(user.username);
         setRole(user.role);
     };
+
+    
+    const filteredUpdates = updates.filter(update => {
+        return (
+            (update.advisor && update.advisor.toLowerCase().includes(searchTerm.advisor.toLowerCase())) &&
+            (update.code && update.code.toLowerCase().includes(searchTerm.code.toLowerCase())) &&
+            (update.name && update.name.toLowerCase().includes(searchTerm.name.toLowerCase()))
+        );
+    });
 
     const handleDelete = async (id) => {
         if (window.confirm('Você tem certeza que deseja excluir este usuário?')) {
@@ -101,7 +127,9 @@ const Admin = () => {
             <div className="erp-create-user">
                 <div className="erp-header">
                     <h1>Painel do Administrador</h1>
-                    <p>Bem-vindo ao painel de administração!</p>
+                    <div><button className="logout-button" onClick={handleLogout}>
+                Logout
+            </button></div>
                 </div>
                 <form className="erp-form" onSubmit={handleSubmit}>
                     <h2>{editingUserId ? 'Editar Usuário' : 'Criar Novo Usuário'}</h2>
@@ -139,19 +167,62 @@ const Admin = () => {
                     ))}
                 </ul>
             </div>
-            <div className="erp-updates">
-                <h2>Atualizações</h2>
-                {updates.length > 0 ? (
-                    updates.map((update, index) => (
-                        <div key={index}>
-                            <h3>Registro {index + 1}</h3>
-                            <pre>{JSON.stringify(update, null, 2)}</pre>
-                        </div>
-                    ))
-                ) : (
-                    <p>Nenhuma atualização disponível.</p>
-                )}
+            <div className='filters'>
+            <div className="erp-filters">
+                <input
+                    type="text"
+                    name="advisor"
+                    placeholder="Filtrar por Advisor"
+                    value={searchTerm.advisor}
+                    onChange={handleSearchChange}
+                />
+                <input
+                    type="text"
+                    name="code"
+                    placeholder="Filtrar por Código"
+                    value={searchTerm.code}
+                    onChange={handleSearchChange}
+                />
+                <input
+                    type="text"
+                    name="name"
+                    placeholder="Filtrar por Nome"
+                    value={searchTerm.name}
+                    onChange={handleSearchChange}
+                />
             </div>
+            </div>
+            <div className="erp-updates">
+    <h2>Atualizações</h2>
+    {updates.length > 0 ? (
+        <div className="erp-updates-grid">
+            {updates.map((update, index) => (
+                <div key={index} className="erp-update-card">
+                    <div className="erp-update-header">
+                        <h3>Registro {index + 1}</h3>
+                        <span className="erp-update-badge">Excluir</span>
+                    </div>
+                    <div className="erp-update-content">
+                        <div className="erp-update-item">
+                            <strong>Advisor:</strong> <span>{update.advisor}</span>
+                        </div>
+                        <div className="erp-update-item">
+                            <strong>Código:</strong> <span>{update.code}</span>
+                        </div>
+                        <div className="erp-update-item">
+                            <strong>Nome:</strong> <span>{update.name}</span>
+                        </div>
+                    </div>
+                </div>
+            ))}
+        </div>
+    ) : (
+        <div className="erp-updates-empty">
+            <p>Nenhuma atualização disponível.</p>
+        </div>
+    )}
+</div>
+
         </div>
     );
 };

@@ -1,0 +1,28 @@
+.erp-admin-container {
+    padding: 20px;
+    text-align: center;
+}
+
+.erp-header {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.logout-button {
+    padding: 10px 20px;
+    background-color: #007bff; /* Azul do Bootstrap */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.logout-button:hover {
+    background-color: #0056b3; /* Azul mais escuro ao passar o mouse */
+}
+
+.logout-button:focus {
+    outline: none; /* Remove o contorno ao clicar */
+}

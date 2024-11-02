@@ -12,11 +12,16 @@ router.get('/clientes', async (req, res) => {
         const results = [];
         
         const fileStream = await fs.readFile(pathFile, { encoding: 'utf-8' });
-        const lines = fileStream.split('\n'); 
+        const lines = fileStream.split('\r').slice(1);
 
         for (const line of lines) {
-            const parsedLine = line.split(';'); 
-            results.push(parsedLine);
+            const [ advisor, code, name ] = line.split(';');
+
+            results.push({
+                advisor: advisor.replace('\n', ''),
+                code,
+                name
+            });
         }
 
         res.json(results);

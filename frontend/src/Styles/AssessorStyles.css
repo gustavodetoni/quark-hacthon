@@ -1,0 +1,189 @@
+:root {
+  --navy: #040c60;
+  --navy-light: #da0000;
+  --red: #d32f2f;
+  --red-light: #ef5350;
+  --white: #ffffff;
+  --gray-50: #fafafa;
+  --gray-100: #f5f5f5;
+  --gray-200: #eeeeee;
+  --shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --transition: all 0.3s ease;
+}
+
+.erp-admin-container {
+  padding: 20px;
+  text-align: center;
+}
+
+.erp-header {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.logout-button {
+  padding: 10px 20px;
+  background-color: #007bff; /* Azul do Bootstrap */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+.logout-button:hover {
+  background-color: #0056b3; /* Azul mais escuro ao passar o mouse */
+}
+
+.logout-button:focus {
+  outline: none; /* Remove o contorno ao clicar */
+}
+
+
+
+.erp-header{
+  display: flex;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+  align-items: center;
+}
+
+.filters{
+  display: flex;
+  justify-content: center;
+}
+
+.erp-filters{
+  max-width: 600px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.erp-filters input {
+  margin: 15px;
+}
+
+/* Main Container */
+.erp-admin-container {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 1.5rem;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+/* Updates Section */
+.erp-updates {
+    background: var(--white);
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+  }
+  
+  .erp-updates h2 {
+    color: var(--navy);
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--navy-light);
+  }
+  
+  /* Updates Grid Layout */
+  .erp-updates-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    padding: 1rem 0;
+  }
+  
+  /* Update Card */
+  .erp-update-card {
+    background: var(--gray-50);
+    border: 1px solid var(--gray-200);
+    border-radius: 8px;
+    padding: 1.5rem;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .erp-update-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-color: var(--navy-light);
+  }
+  
+  /* Update Card Header */
+  .erp-update-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--gray-200);
+  }
+  
+  .erp-update-header h3 {
+    color: var(--navy);
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin: 0;
+  }
+  
+  .erp-update-badge {
+    background: var(--navy-light);
+    color: var(--white);
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+  }
+  
+  /* Update Content */
+  .erp-update-content {
+    padding: 1rem;
+  }
+  
+  /* Individual Update Item */
+  .erp-update-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+  }
+  
+  .erp-update-item strong {
+    color: var(--navy);
+  }
+  
+  .erp-update-item span {
+    color: var(--navy-light);
+  }
+  
+  /* Empty State */
+  .erp-updates-empty {
+    text-align: center;
+    padding: 3rem;
+    background: var(--gray-50);
+    border-radius: 8px;
+    color: var(--navy);
+  }
+  
+  .erp-updates-empty p {
+    font-size: 1.1rem;
+    margin: 0;
+    color: var(--navy-light);
+  }
+  
+  /* Responsive Adjustments */
+  @media (max-width: 768px) {
+    .erp-updates-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .erp-update-card {
+      margin-bottom: 1rem;
+    }
+  }
+  
