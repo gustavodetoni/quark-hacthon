@@ -85,41 +85,49 @@ const Admin = () => {
     };
 
     return (
-        <div className='container-admin'>
-            <h1>Painel do Administrador</h1>
-            <p>Bem-vindo ao painel de administração!</p>
-            {error && <p style={{ color: 'red' }}>{error}</p>}
-            <form onSubmit={handleSubmit}>
-                <h2>{editingUserId ? 'Editar Usuário' : 'Criar Novo Usuário'}</h2>
-                <div>
-                    <label>Nome de Usuário:</label>
-                    <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} required />
+        <div className='erp-admin-container'>
+            <div className="erp-create-user">
+                <div className="erp-header">
+                    <h1>Painel do Administrador</h1>
+                    <p>Bem-vindo ao painel de administração!</p>
                 </div>
-                <div>
-                    <label>Senha:</label>
-                    <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
-                </div>
-                <div>
-                    <label>Função:</label>
-                    <select value={role} onChange={(e) => setRole(e.target.value)}>
-                        <option value="trainee">Trainee</option>
-                        <option value="assessor">Assessor</option>
-                        <option value="admin">Admin</option>
-                    </select>
-                </div>
-                <button type="submit">{editingUserId ? 'Atualizar Usuário' : 'Criar Usuário'}</button>
-            </form>
+                {error && <p className="erp-error-message">{error}</p>}
+                <form className="erp-form" onSubmit={handleSubmit}>
+                    <h2>{editingUserId ? 'Editar Usuário' : 'Criar Novo Usuário'}</h2>
+                    <div>
+                        <label>Nome de Usuário:</label>
+                        <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} required />
+                    </div>
+                    <div>
+                        <label>Senha:</label>
+                        <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+                    </div>
+                    <div>
+                        <label>Função:</label>
+                        <select value={role} onChange={(e) => setRole(e.target.value)}>
+                            <option value="trainee">Trainee</option>
+                            <option value="assessor">Assessor</option>
+                            <option value="admin">Admin</option>
+                        </select>
+                    </div>
+                    <button type="submit" className="erp-button">{editingUserId ? 'Atualizar Usuário' : 'Criar Usuário'}</button>
+                </form>
+            </div>
 
-            <h2>Lista de Usuários</h2>
-            <ul>
-                {users.map((user) => (
-                    <li key={user.id}>
-                        {user.username} - {user.role}
-                        <button onClick={() => handleEdit(user)}>Editar</button>
-                        <button onClick={() => handleDelete(user.id)}>Excluir</button>
-                    </li>
-                ))}
-            </ul>
+            <div className="erp-user-list">
+                <h2>Lista de Usuários</h2>
+                <ul className="erp-user-list-container">
+                    {users.map((user) => (
+                        <li className="erp-user-list-item" key={user.id}>
+                            {user.username} - {user.role}
+                            <div>
+                                <button className="erp-button" onClick={() => handleEdit(user)}>Editar</button>
+                                <button className="erp-button" onClick={() => handleDelete(user.id)}>Excluir</button>
+                            </div>
+                        </li>
+                    ))}
+                </ul>
+            </div>
         </div>
     );
 };
