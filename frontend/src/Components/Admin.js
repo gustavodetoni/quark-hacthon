@@ -123,14 +123,92 @@ const Admin = () => {
     };
 
     return (
-        <div className='erp-admin-container'>
-            <div className="erp-create-user">
-                <div className="erp-header">
-                    <h1>Painel do Administrador</h1>
-                    <div><button className="logout-button" onClick={handleLogout}>
-                Logout
-            </button></div>
+        <div className="erp-admin-container">
+        <div className="erp-header">
+            <h1>Painel do Administrador</h1>
+            <div>
+                <button className="logout-button" onClick={handleLogout}>Logout</button>
+            </div>
+        </div>
+        
+        <div className="erp-main-grid">
+            <div>
+                <div className="erp-user-list">
+                    <h2>Lista de Usuários</h2>
+                    <ul className="erp-user-list-container">
+                        {users.map((user) => (
+                            <li className="erp-user-list-item" key={user.id}>
+                                {user.username} - {user.role}
+                                <div>
+                                    <button className="erp-button" onClick={() => handleEdit(user)}>Editar</button>
+                                    <button className="erp-button" onClick={() => handleDelete(user.id)}>Excluir</button>
+                                </div>
+                            </li>
+                        ))}
+                    </ul>
                 </div>
+
+                <div className='filters'>
+                    <div className="erp-filters">
+                        <input
+                            type="text"
+                            name="advisor"
+                            placeholder="Filtrar por Advisor"
+                            value={searchTerm.advisor}
+                            onChange={handleSearchChange}
+                        />
+                        <input
+                            type="text"
+                            name="code"
+                            placeholder="Filtrar por Código"
+                            value={searchTerm.code}
+                            onChange={handleSearchChange}
+                        />
+                        <input
+                            type="text"
+                            name="name"
+                            placeholder="Filtrar por Nome"
+                            value={searchTerm.name}
+                            onChange={handleSearchChange}
+                        />
+                    </div>
+                </div>
+
+                <div className="erp-updates">
+                    <h2>Clientes</h2>
+                    {filteredUpdates.length > 0 ? (
+                        <div className="erp-updates-grid">
+                            {filteredUpdates.map((update, index) => (
+                                <div key={index} className="erp-update-card">
+                                    <div className="erp-update-header">
+                                        <h3>Cliente {index + 1}</h3>
+                                        <span className="erp-update-badge-verde">Vincular</span>
+                                        <span className="erp-update-badge">Excluir</span>
+                                    </div>
+                                    <div className="erp-update-content">
+                                        <div className="erp-update-item">
+                                            <strong>Advisor:</strong> <span>{update.advisor}</span>
+                                        </div>
+                                        <div className="erp-update-item">
+                                            <strong>Código:</strong> <span>{update.code}</span>
+                                        </div>
+                                        <div className="erp-update-item">
+                                            <strong>Nome:</strong> <span>{update.name}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    ) : (
+                        <div className="erp-updates-empty">
+                            <p>Nenhuma atualização disponível.</p>
+                        </div>
+                    )}
+                </div>
+            </div>
+            
+            {/* Coluna da direita */}
+            <div className="erp-create-user">
                 <form className="erp-form" onSubmit={handleSubmit}>
                     <h2>{editingUserId ? 'Editar Usuário' : 'Criar Novo Usuário'}</h2>
                     <div>
@@ -152,78 +230,8 @@ const Admin = () => {
                     <button type="submit" className="erp-button">{editingUserId ? 'Atualizar Usuário' : 'Criar Usuário'}</button>
                 </form>
             </div>
-
-            <div className="erp-user-list">
-                <h2>Lista de Usuários</h2>
-                <ul className="erp-user-list-container">
-                    {users.map((user) => (
-                        <li className="erp-user-list-item" key={user.id}>
-                            {user.username} - {user.role}
-                            <div>
-                                <button className="erp-button" onClick={() => handleEdit(user)}>Editar</button>
-                                <button className="erp-button" onClick={() => handleDelete(user.id)}>Excluir</button>
-                            </div>
-                        </li>
-                    ))}
-                </ul>
-            </div>
-            <div className='filters'>
-            <div className="erp-filters">
-                <input
-                    type="text"
-                    name="advisor"
-                    placeholder="Filtrar por Advisor"
-                    value={searchTerm.advisor}
-                    onChange={handleSearchChange}
-                />
-                <input
-                    type="text"
-                    name="code"
-                    placeholder="Filtrar por Código"
-                    value={searchTerm.code}
-                    onChange={handleSearchChange}
-                />
-                <input
-                    type="text"
-                    name="name"
-                    placeholder="Filtrar por Nome"
-                    value={searchTerm.name}
-                    onChange={handleSearchChange}
-                />
-            </div>
-            </div>
-            <div className="erp-updates">
-    <h2>Atualizações</h2>
-    {updates.length > 0 ? (
-        <div className="erp-updates-grid">
-            {updates.map((update, index) => (
-                <div key={index} className="erp-update-card">
-                    <div className="erp-update-header">
-                        <h3>Registro {index + 1}</h3>
-                        <span className="erp-update-badge">Excluir</span>
-                    </div>
-                    <div className="erp-update-content">
-                        <div className="erp-update-item">
-                            <strong>Advisor:</strong> <span>{update.advisor}</span>
-                        </div>
-                        <div className="erp-update-item">
-                            <strong>Código:</strong> <span>{update.code}</span>
-                        </div>
-                        <div className="erp-update-item">
-                            <strong>Nome:</strong> <span>{update.name}</span>
-                        </div>
-                    </div>
-                </div>
-            ))}
         </div>
-    ) : (
-        <div className="erp-updates-empty">
-            <p>Nenhuma atualização disponível.</p>
-        </div>
-    )}
-</div>
-
-        </div>
+    </div>
     );
 };
 

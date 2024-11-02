@@ -44,14 +44,20 @@ const Assessor = () => {
 
     const handleLogout = () => {
         localStorage.removeItem('token');
+        localStorage.removeItem('advisorName'); 
         window.location.href = '/';
     };
 
+    // Lógica de filtragem
     const filteredUpdates = updates.filter(update => {
+        const isAdvisorMatch = update.advisor && update.advisor.toLowerCase().includes(searchTerm.advisor.toLowerCase());
+        const isCodeMatch = update.code && update.code.toLowerCase().includes(searchTerm.code.toLowerCase());
+        const isNameMatch = update.name && update.name.toLowerCase().includes(searchTerm.name.toLowerCase());
+        
         return (
-            (update.advisor && update.advisor.toLowerCase().includes(searchTerm.advisor.toLowerCase())) &&
-            (update.code && update.code.toLowerCase().includes(searchTerm.code.toLowerCase())) &&
-            (update.name && update.name.toLowerCase().includes(searchTerm.name.toLowerCase()))
+            (searchTerm.advisor === '' || isAdvisorMatch) &&
+            (searchTerm.code === '' || isCodeMatch) &&
+            (searchTerm.name === '' || isNameMatch)
         );
     });
 
@@ -61,7 +67,7 @@ const Assessor = () => {
                 <h2>Bem-vindo, Assessor!</h2>
                 <button className="logout-button" onClick={handleLogout}>Logout</button>
             </div>
-            
+
             <div className='filters'>
                 <div className="erp-filters">
                     <input
@@ -94,7 +100,6 @@ const Assessor = () => {
                     <div className="erp-updates-grid">
                         {filteredUpdates.map((update, index) => (
                             <div key={index} className="erp-update-card">
-                                
                                 <div><strong>Advisor:</strong> {update.advisor}</div>
                                 <div><strong>Código:</strong> {update.code}</div>
                                 <div><strong>Nome:</strong> {update.name}</div>

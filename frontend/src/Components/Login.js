@@ -19,6 +19,8 @@ const Login = ({ setUserRole, setUsername }) => {
             setUsername(usernameInput); 
             setUserRole(response.data.role); 
 
+            localStorage.setItem('advisorName', response.data.advisorName); 
+
             if (response.data.role === 'admin') {
                 navigate('/verify'); 
             } else if (response.data.role === 'trainee') {
