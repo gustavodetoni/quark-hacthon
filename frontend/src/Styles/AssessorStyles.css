@@ -187,3 +187,32 @@
     }
   }
   
+
+  .erp-operations-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-size: 16px;
+    color: var(--navy);
+    box-shadow: var(--shadow);
+}
+
+.erp-operations-table th, .erp-operations-table td {
+    padding: 12px 15px;
+    border: 1px solid var(--gray-200);
+    text-align: center;
+}
+
+.erp-operations-table th {
+    background-color: var(--navy);
+    color: var(--white);
+    font-weight: 600;
+}
+
+.erp-operations-table tr:nth-child(even) {
+    background-color: var(--gray-100);
+}
+
+.erp-operations-table tr:hover {
+    background-color: var(--gray-200);
+}

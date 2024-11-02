@@ -1,76 +1,255 @@
+:root {
+  font-family: 'Arial', sans-serif;
+  --navy: #1a237e;
+  --navy-light: #534bae;
+  --red: #d32f2f;
+  --white: #ffffff;
+  --gray-50: #fafafa;
+  --gray-100: #f5f5f5;
+  --gray-200: #eeeeee;
+  --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --transition: all 0.3s ease;
+}
+
 .container-login {
-    font-family: 'Arial', sans-serif;
-    line-height: 1.6;
-    color: #333;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .login-container {
-    max-width: 400px;
-    width: 100%;
-    background-color: #fff;
-    padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  h2 {
-    color: #2c3e50;
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  form {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .form-group {
-    margin-bottom: 15px;
-  }
-  
-  label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-  }
-  
-  input[type="text"],
-  input[type="password"] {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 16px;
-  }
-  
-  .button-login {
-    background-color: #df0000;
-    color: #fff;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
-  }
-  
-  .button-login:hover {
-    background-color: #e75643;
-  }
-  
-  /* Error message */
-  .error-message {
-    color: #e74c3c;
-    margin-bottom: 15px;
-    font-weight: bold;
-    text-align: center;
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  background: var(--white);
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+}
+
+/* Form Section */
+.container-login form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 3rem;
+  gap: 1.5rem;
+  background: var(--white);
+  height: 100%;
+  max-width: 400px; 
+  margin: auto;
+}
+
+.container-login input[type="text"],
+.container-login input[type="password"] {
+  width: 100%; 
+  padding: 1rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  border: 2px solid var(--gray-200);
+  background: var(--gray-50);
+  transition: var(--transition);
+}
+
+.container-login input[type="text"],
+.container-login input[type="password"] {
+  width: 100%;
+  padding: 1rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  border: 2px solid var(--gray-200);
+  background: var(--gray-50);
+  transition: var(--transition);
+  display: flex;
+
+}
+
+.container-login input[type="text"]:focus,
+.container-login input[type="password"]:focus {
+  border-color: var(--navy);
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(26, 35, 126, 0.1);
+  background: var(--white);
+}
+
+/* Reset alguns estilos padrão */
+.container-login {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.container-login {
+  height: 100%;
+  overflow: hidden;
+}
+
+/* Main Container */
+.container-login {
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  background: var(--white);
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+}
+
+/* Form Section */
+.container-login form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 3rem;
+  gap: 1.5rem;
+  background: var(--white);
+  height: 100%;
+}
+
+.container-login h2 {
+  color: var(--navy);
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+.container-login h2::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -0.5rem;
+  width: 60px;
+  height: 4px;
+  background: var(--navy);
+  border-radius: 2px;
+}
+
+/* Form Elements - Padronizados */
+.container-login form div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.container-login label {
+  color: var(--navy);
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+/* Input e Button com o mesmo estilo */
+.container-login input,
+.button-login {
+  width: 100%;
+  padding: 1rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: var(--transition);
+}
+
+/* Estilo específico para inputs */
+.container-login input {
+  border: 2px solid var(--gray-200);
+  background: var(--gray-50);
+}
+
+.container-login input:focus {
+  border-color: var(--navy);
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(26, 35, 126, 0.1);
+  background: var(--white);
+}
+
+/* Login Button */
+.button-login {
+  background: var(--navy);
+  color: var(--white);
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.button-login:hover {
+  background: var(--navy-light);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(26, 35, 126, 0.2);
+}
+
+.button-login:active {
+  transform: translateY(0);
+}
+
+/* Image Section */
+.fotoprincipal {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Error Message */
+.container-login p[style*="color: red"] {
+  background: rgba(211, 47, 47, 0.1);
+  color: var(--red) !important;
+  padding: 1rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  border: 1px solid var(--red);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .container-login {
+    grid-template-columns: 1fr;
   }
 
   .fotoprincipal {
-    max-width: 800px;
+    display: none;
   }
+
+  .container-login form {
+    padding: 2rem;
+    max-width: 500px;
+    margin: 0 auto;
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .container-login form {
+    padding: 1.5rem;
+  }
+
+  .container-login h2 {
+    font-size: 2rem;
+  }
+
+  .container-login input,
+  .button-login {
+    padding: 0.875rem;
+  }
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.container-login form > * {
+  animation: fadeIn 0.5s ease forwards;
+}
+
+.container-login form > *:nth-child(1) { animation-delay: 0.1s; }
+.container-login form > *:nth-child(2) { animation-delay: 0.2s; }
+.container-login form > *:nth-child(3) { animation-delay: 0.3s; }
+.container-login form > *:nth-child(4) { animation-delay: 0.4s; }
